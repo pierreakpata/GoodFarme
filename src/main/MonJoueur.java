@@ -17,11 +17,13 @@ import java.util.ArrayList;
  */
 public class MonJoueur extends Joueur
 {
+    private ArrayList<Node> cheminLePlusCourt;
 
 
     public MonJoueur(String sonNom)
     {
         super(sonNom);
+        cheminLePlusCourt = new ArrayList<>();
 
 
     }
@@ -51,8 +53,9 @@ public class MonJoueur extends Joueur
         {
             for (int y = 0; y < etatDuJeu.donneTaille(); y++)
             {
-                if (Plateau.contientUnChamp(etatDuJeu.donneContenuCellule(x, y)))
-                    listeChamps.add(new Node(x, y));
+                if ( (Plateau.contientUnChamp(etatDuJeu.donneContenuCellule(x, y)) &&
+                            (Plateau.contientUnChampQuiNeLuiAppartientPas(this,etatDuJeu.donneContenuCellule(x,y)) )))
+                {  listeChamps.add(new Node(x, y));}
             }
         }
         return listeChamps;
@@ -60,6 +63,7 @@ public class MonJoueur extends Joueur
 
     public ArrayList<Node> cheminPlusCourtVersChamp(Plateau etatDuJeu)
     {
+
         System.out.println("test-1");
         ArrayList<Node> obstacles = getObstacles(etatDuJeu);
         ArrayList<Node> temp;
@@ -76,15 +80,34 @@ public class MonJoueur extends Joueur
         return min;
     }
 
+    public Action traduitNodeEnAction(Node cible)
+    {
+        Action action = null;
+        if (this.donnePosition().x == cible.x && this.donnePosition().y > cible.y)
+            action = Action.HAUT;
+        if (this.donnePosition().x == cible.x && this.donnePosition().y < cible.y)
+            action = Action.BAS;
+        if (this.donnePosition().y == cible.y && this.donnePosition().x > cible.x)
+            action = Action.GAUCHE;
+        if (this.donnePosition().y == cible.y && this.donnePosition().x < cible.x)
+            action = Action.DROITE;
+
+        cheminLePlusCourt.remove(cible);
+
+        return action;
+    }
+
 
     @Override
     public Action faitUneAction(Plateau etatDuJeu)
     {
-        cheminPlusCourtVersChamp(etatDuJeu);
+        if (cheminLePlusCourt.size() == 0)
+            cheminLePlusCourt = cheminPlusCourtVersChamp(etatDuJeu);
         // getChamps(etatDuJeu);
         //ArrayList<Node> eej = etatDuJeu.donneCheminAvecObstaclesSupplementaires(this.donnePosition(), new Node(2, 1), getObstacles(etatDuJeu));
         //System.out.println(eej);
-        return Action.RIEN;
+
+        return traduitNodeEnAction(cheminLePlusCourt.get(0));
 
 
     }
