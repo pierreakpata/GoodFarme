@@ -20,7 +20,8 @@ public class MonJoueur extends Joueur {
 
     @Override
     public Action faitUneAction(Plateau etatDuJeu) {
-        return super.faitUneAction(etatDuJeu); // a modifier
+        //return super.faitUneAction(etatDuJeu); // a modifier
+        return Action.GAUCHE;
     }
     
 }
