@@ -7,21 +7,85 @@ package main;
 
 import jeu.Joueur;
 import jeu.Plateau;
+import jeu.astar.*;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 /**
- *
  * @author lucile
  */
-public class MonJoueur extends Joueur {
+public class MonJoueur extends Joueur
+{
 
-    public MonJoueur(String sonNom) {
+
+    public MonJoueur(String sonNom)
+    {
         super(sonNom);
+
+
     }
+
+    private ArrayList<Node> getObstacles(Plateau etatDuJeu)
+    {
+        ArrayList<Node> listeObstacles = new ArrayList<>();
+
+
+        for (int x = 0; x < etatDuJeu.donneTaille(); x++)
+        {
+            for (int y = 0; y < etatDuJeu.donneTaille(); y++)
+            {
+                if (etatDuJeu.donneContenuCellule(x, y) == Plateau.ENDROIT_INFRANCHISSABLE)
+                    listeObstacles.add(new Node(x, y));
+            }
+        }
+        return listeObstacles;
+    }
+
+    private ArrayList<Node> getChamps(Plateau etatDuJeu)
+    {
+        ArrayList<Node> listeChamps = new ArrayList<>();
+
+
+        for (int x = 0; x < etatDuJeu.donneTaille(); x++)
+        {
+            for (int y = 0; y < etatDuJeu.donneTaille(); y++)
+            {
+                if (Plateau.contientUnChamp(etatDuJeu.donneContenuCellule(x, y)))
+                    listeChamps.add(new Node(x, y));
+            }
+        }
+        return listeChamps;
+    }
+
+    public ArrayList<Node> cheminPlusCourtVersChamp(Plateau etatDuJeu)
+    {
+        System.out.println("test-1");
+        ArrayList<Node> obstacles = getObstacles(etatDuJeu);
+        ArrayList<Node> temp;
+        ArrayList<Node> champs = getChamps(etatDuJeu);
+        ArrayList<Node> min = etatDuJeu.donneCheminAvecObstaclesSupplementaires(this.donnePosition(), champs.get(0), obstacles);
+        for (Node node : champs)
+        {
+            System.out.println("test");
+            temp = etatDuJeu.donneCheminAvecObstaclesSupplementaires(this.donnePosition(), node, obstacles);
+            if (min.size() > temp.size())
+                min = temp;
+        }
+        System.out.println(min);
+        return min;
+    }
+
 
     @Override
-    public Action faitUneAction(Plateau etatDuJeu) {
-        //return super.faitUneAction(etatDuJeu); // a modifier
-        return Action.GAUCHE;
+    public Action faitUneAction(Plateau etatDuJeu)
+    {
+        cheminPlusCourtVersChamp(etatDuJeu);
+        // getChamps(etatDuJeu);
+        //ArrayList<Node> eej = etatDuJeu.donneCheminAvecObstaclesSupplementaires(this.donnePosition(), new Node(2, 1), getObstacles(etatDuJeu));
+        //System.out.println(eej);
+        return Action.RIEN;
+
+
     }
-    
 }
