@@ -3,6 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/**
+ * Paquet
+ */
 package main;
 
 import jeu.Joueur;
@@ -12,22 +15,36 @@ import jeu.astar.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+
 /**
- * @author lucile
+ * Classe d&eacute;finissant les m&eacute;thodes permettant de d&eacute;terminer le comportement et les actions de notre joueur.
+ *  @author [Gabriel, Pierre, Amandine, Charafa, L&eacute;onie]
  */
 public class MonJoueur extends Joueur
 {
     private ArrayList<Node> cheminLePlusCourtVersChamps;
     private ArrayList<Node> cheminLePlusCourtVersYourte;
 
+    /**
+     * Constructeur de la classe, faisant appel au constructeur de la classe mère @{@link Joueur}
+     * et initialise @{{@link MonJoueur#cheminLePlusCourtVersChamps}} à une @{@link ArrayList} vide et le nom de notre joueur.
+     * @param sonNom correspond au nom du joueur.
+     */
     public MonJoueur(String sonNom)
     {
         super(sonNom);
         cheminLePlusCourtVersChamps = new ArrayList<>();
-
+        cheminLePlusCourtVersYourte = new ArrayList<>();
 
     }
 
+
+    /**
+     * Permet d'obtenir une liste d'obstacles (un obstacle est soit un arbre soit un joueur (permet d'&eacute;viter que l'on soit bloqu&eacute;) par d'autres joueurs.
+     *
+     * @param etatDuJeu Repr&eacute;sente l'&eacute;tat du plateau de jeu actuel.
+     * @return Renvoie une @{@link ArrayList} contenant les nodes où les obstacles se situent.
+     */
     private ArrayList<Node> getObstacles(Plateau etatDuJeu)
     {
         ArrayList<Node> listeObstacles = new ArrayList<>();
@@ -49,6 +66,11 @@ public class MonJoueur extends Joueur
         return listeObstacles;
     }
 
+    /**
+     * Permet de r&eacute;cup&eacute;rer une liste des champs qui ne sont pas pris par notre @{@link MonJoueur}
+     * @param etatDuJeu Repr&eacute;sente l'&eacute;tat du plateau de jeu actuel.
+     * @return Renvoie une @{@link ArrayList} contenant les nodes où les champs ne nous appartenant pas se situent.
+     */
     private ArrayList<Node> getChamps(Plateau etatDuJeu)
     {
         ArrayList<Node> listeChamps = new ArrayList<>();
@@ -68,6 +90,12 @@ public class MonJoueur extends Joueur
         return listeChamps;
     }
 
+
+    /**
+     * Calcule une liste de @{@link Node} guidant notre joueur vers le champ le plus proche à l'aide de l'algorithme @{@link AStar}
+     * @param etatDuJeu Repr&eacute;sente l'&eacute;tat du plateau de jeu actuel.
+     * @return Renvoie une @{@link ArrayList} de @{@link Node} guidant notre joueur vers le champ le plus proche
+     */
     public ArrayList<Node> cheminPlusCourtVersChamps(Plateau etatDuJeu)
     {
         ArrayList<Node> obstacles = getObstacles(etatDuJeu);
@@ -95,6 +123,13 @@ public class MonJoueur extends Joueur
         }
     }
 
+
+    /**
+     * Calcule une liste de @{@link Node} guidant notre joueur vers la yourte la plus proche à l'aide de l'algorithme @{@link AStar},
+     * prend en compte les obstacles (joueurs et arbres).
+     * @param etatDuJeu Repr&eacute;sente l'&eacute;tat du plateau de jeu actuel.
+     * @return Renvoie une @{@link ArrayList} de @{@link Node} guidant notre joueur vers la yourte le plus proche
+     */
     public ArrayList<Node> cheminLePlusCourtVersYourte(Plateau etatDuJeu)
     {
         ArrayList<Node> obstacles = getObstacles(etatDuJeu);
@@ -126,10 +161,9 @@ public class MonJoueur extends Joueur
 
 
     /**
-     * Récupère la liste des Yourtes disponibles (pas occupées par d'autres joueurs nous inclus)
-     *
-     * @param etatDuJeu
-     * @return {@link  ArrayList<Node>} ArrayList de Nodes contenant les positions des différentes yourtes
+     * R&eacute;cupère la liste des Yourtes disponibles (pas occup&eacute;es par d'autres joueurs nous inclus)
+     * @param etatDuJeu Repr&eacute;sente l'&eacute;tat du plateau de jeu actuel.
+     * @return {@link ArrayList} ArrayList de Nodes contenant les positions des diff&eacute;rentes yourtes
      */
     public ArrayList<Node> getYourtes(Plateau etatDuJeu)
     {
@@ -150,7 +184,12 @@ public class MonJoueur extends Joueur
         return listeYourtes;
     }
 
-
+    /**
+     * En fonction du noeud recu en argument on renvoie l'action qui correspond au mouvement à effectuer.
+     * @param cible Repr&eacute;sente le point vers lequel le joueur doit se d&eacute;placer
+     * @param type  Permet de choisir si le joueur se d&eacute;place vers une yourte ou un champ
+     * @return une Action qui sera utilis&eacute;e par {@link MonJoueur#faitUneAction(Plateau)}
+     */
     public Action traduitNodeEnAction(Node cible, int type)
     {
         Action action = null;
@@ -178,7 +217,12 @@ public class MonJoueur extends Joueur
         return action;
     }
 
-
+    /**
+     * La fonction permet de d&eacute;terminer l'action la plus adapt&eacute;e à l'environnement.
+     *
+     * @param etatDuJeu &eacute;tat du plateau de jeu
+     * @return une action d&eacute;finie en fonction de diff&eacute;rents critères
+     */
     @Override
     public Action faitUneAction(Plateau etatDuJeu)
     {

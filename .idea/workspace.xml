@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e5cad710-ce89-4348-b8fe-e32819e70b98" name="Changes" comment="Ajout de gestion de l'énergie">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/MonJoueurTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GoodFarme/main/MonJoueur.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GoodFarme/main/MonJoueur.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/MonJoueur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/MonJoueur.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="26QFWgVUSRDpxHqBz8WIoo6Brl7" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="main" />
+      <recent name="test" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.MonJoueurTest">
+    <configuration name="GoodFarm" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="main.Lanceur" />
+      <module name="GoodFarme" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MonJoueurTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GoodFarme" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.MonJoueur" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main" />
+      <option name="MAIN_CLASS_NAME" value="main.MonJoueurTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MonJoueurTest.cheminLePlusCourtVersYourte" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GoodFarme" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main" />
+      <option name="MAIN_CLASS_NAME" value="main.MonJoueurTest" />
+      <option name="METHOD_NAME" value="cheminLePlusCourtVersYourte" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MonJoueurTest.cheminPlusCourtVersChamps" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GoodFarme" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main" />
+      <option name="MAIN_CLASS_NAME" value="main.MonJoueurTest" />
+      <option name="METHOD_NAME" value="cheminPlusCourtVersChamps" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MonJoueurTest.faitUneAction" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GoodFarme" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main" />
+      <option name="MAIN_CLASS_NAME" value="main.MonJoueurTest" />
+      <option name="METHOD_NAME" value="faitUneAction" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MonJoueurTest.traduitNodeEnAction" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GoodFarme" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main" />
+      <option name="MAIN_CLASS_NAME" value="main.MonJoueurTest" />
+      <option name="METHOD_NAME" value="traduitNodeEnAction" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.GoodFarm" />
+      <item itemvalue="JUnit.MonJoueurTest.cheminPlusCourtVersChamps" />
+      <item itemvalue="JUnit.MonJoueurTest.cheminLePlusCourtVersYourte" />
+      <item itemvalue="JUnit.MonJoueurTest.traduitNodeEnAction" />
+      <item itemvalue="JUnit.MonJoueurTest.faitUneAction" />
+      <item itemvalue="JUnit.MonJoueurTest" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MonJoueurTest" />
+        <item itemvalue="JUnit.MonJoueurTest.traduitNodeEnAction" />
+        <item itemvalue="JUnit.MonJoueurTest.faitUneAction" />
+        <item itemvalue="JUnit.MonJoueurTest.cheminLePlusCourtVersYourte" />
+        <item itemvalue="JUnit.MonJoueurTest.cheminPlusCourtVersChamps" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e5cad710-ce89-4348-b8fe-e32819e70b98" name="Changes" comment="" />
+      <created>1647347937930</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1647347937930</updated>
+      <workItem from="1647347943410" duration="17162000" />
+    </task>
+    <task id="LOCAL-00001" summary="Ajout de gestion de l'énergie">
+      <created>1647350975463</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1647350975463</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Ajout de gestion de l'énergie">
+      <created>1647358354647</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1647358354647</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Ajout de gestion de l'énergie" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout de gestion de l'énergie" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/GoodFarme$MonJoueurTest.ic" NAME="MonJoueurTest Coverage Results" MODIFIED="1647365212586" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>main.MonJoueur</FILTER>
+    </SUITE>
+  </component>
+</project>
