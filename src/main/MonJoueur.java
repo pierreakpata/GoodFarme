@@ -38,9 +38,12 @@ public class MonJoueur extends Joueur
             {
                 if (etatDuJeu.donneContenuCellule(x, y) == Plateau.ENDROIT_INFRANCHISSABLE)
                     listeObstacles.add(new Node(x, y));
-                if(Plateau.contientUnJoueur(etatDuJeu.donneContenuCellule(x, y)))
+                if (Plateau.contientUnJoueur(etatDuJeu.donneContenuCellule(x, y)))
                     listeObstacles.add(new Node(x, y));
-                //etatDuJeu.cherche(this.donnePosition(), 2, Plateau.CHERCHE_JOUEUR)
+                for (Point point : etatDuJeu.cherche(this.donnePosition(), 2, Plateau.CHERCHE_JOUEUR).get(4))
+                {
+                    listeObstacles.add(new Node(point.x, point.y));
+                }
             }
         }
         return listeObstacles;
@@ -55,31 +58,41 @@ public class MonJoueur extends Joueur
         {
             for (int y = 0; y < etatDuJeu.donneTaille(); y++)
             {
-                if ( (Plateau.contientUnChamp(etatDuJeu.donneContenuCellule(x, y)) &&
-                            (Plateau.contientUnChampQuiNeLuiAppartientPas(this,etatDuJeu.donneContenuCellule(x,y)) )))
-                {  listeChamps.add(new Node(x, y));}
+                if ((Plateau.contientUnChamp(etatDuJeu.donneContenuCellule(x, y)) &&
+                        (Plateau.contientUnChampQuiNeLuiAppartientPas(this, etatDuJeu.donneContenuCellule(x, y)))))
+                {
+                    listeChamps.add(new Node(x, y));
+                }
             }
         }
         return listeChamps;
     }
 
-    public ArrayList<Node> cheminPlusCourtVersChamp(Plateau etatDuJeu)
+    public ArrayList<Node> cheminPlusCourtVersObjectif(Plateau etatDuJeu)
     {
-
         System.out.println("test-1");
         ArrayList<Node> obstacles = getObstacles(etatDuJeu);
         ArrayList<Node> temp;
         ArrayList<Node> champs = getChamps(etatDuJeu);
-        ArrayList<Node> min = etatDuJeu.donneCheminAvecObstaclesSupplementaires(this.donnePosition(), champs.get(0), obstacles);
-        for (Node node : champs)
+
+        if (champs.size() != 0)
         {
-            System.out.println("test");
-            temp = etatDuJeu.donneCheminAvecObstaclesSupplementaires(this.donnePosition(), node, obstacles);
-            if (min.size() > temp.size())
-                min = temp;
+
+            ArrayList<Node> min = etatDuJeu.donneCheminAvecObstaclesSupplementaires(this.donnePosition(), champs.get(0), obstacles);
+            System.out.printf("[min]: " + min);
+            for (Node node : champs)
+            {
+                System.out.println("test");
+                temp = etatDuJeu.donneCheminAvecObstaclesSupplementaires(this.donnePosition(), node, obstacles);
+                if (min.size() > temp.size())
+                    min = temp;
+            }
+            System.out.println(min);
+            return min;
+        } else
+        {
+            return new ArrayList<Node>();
         }
-        System.out.println(min);
-        return min;
     }
 
     public Action traduitNodeEnAction(Node cible)
@@ -93,7 +106,8 @@ public class MonJoueur extends Joueur
             action = Action.GAUCHE;
         if (this.donnePosition().y == cible.y && this.donnePosition().x < cible.x)
             action = Action.DROITE;
-
+        if (this.cheminLePlusCourt.size() == 0)
+            action = Action.RIEN;
         cheminLePlusCourt.remove(cible);
 
         return action;
@@ -104,12 +118,12 @@ public class MonJoueur extends Joueur
     public Action faitUneAction(Plateau etatDuJeu)
     {
         if (cheminLePlusCourt.size() == 0)
-            cheminLePlusCourt = cheminPlusCourtVersChamp(etatDuJeu);
-        // getChamps(etatDuJeu);
-        //ArrayList<Node> eej = etatDuJeu.donneCheminAvecObstaclesSupplementaires(this.donnePosition(), new Node(2, 1), getObstacles(etatDuJeu));
-        //System.out.println(eej);
+            cheminLePlusCourt = cheminPlusCourtVersObjectif(etatDuJeu);
+        if(cheminLePlusCourt.size() != 0)
+            return traduitNodeEnAction(cheminLePlusCourt.get(0));
+        return Action.RIEN;
 
-        return traduitNodeEnAction(cheminLePlusCourt.get(0));
+
 
 
     }
