@@ -32,13 +32,15 @@ public class MonJoueur extends Joueur
     {
         ArrayList<Node> listeObstacles = new ArrayList<>();
 
-
         for (int x = 0; x < etatDuJeu.donneTaille(); x++)
         {
             for (int y = 0; y < etatDuJeu.donneTaille(); y++)
             {
                 if (etatDuJeu.donneContenuCellule(x, y) == Plateau.ENDROIT_INFRANCHISSABLE)
                     listeObstacles.add(new Node(x, y));
+                if(Plateau.contientUnJoueur(etatDuJeu.donneContenuCellule(x, y)))
+                    listeObstacles.add(new Node(x, y));
+                //etatDuJeu.cherche(this.donnePosition(), 2, Plateau.CHERCHE_JOUEUR)
             }
         }
         return listeObstacles;
