@@ -70,7 +70,6 @@ public class MonJoueur extends Joueur
 
     public ArrayList<Node> cheminPlusCourtVersObjectif(Plateau etatDuJeu)
     {
-        System.out.println("test-1");
         ArrayList<Node> obstacles = getObstacles(etatDuJeu);
         ArrayList<Node> temp;
         ArrayList<Node> champs = getChamps(etatDuJeu);
@@ -79,21 +78,88 @@ public class MonJoueur extends Joueur
         {
 
             ArrayList<Node> min = etatDuJeu.donneCheminAvecObstaclesSupplementaires(this.donnePosition(), champs.get(0), obstacles);
-            System.out.printf("[min]: " + min);
             for (Node node : champs)
             {
-                System.out.println("test");
                 temp = etatDuJeu.donneCheminAvecObstaclesSupplementaires(this.donnePosition(), node, obstacles);
-                if (min.size() > temp.size())
-                    min = temp;
+                if ((temp != null && min != null))
+                {
+                    if (min.size() > temp.size())
+                        min = temp;
+                }
+
             }
-            System.out.println(min);
-            return min;
+            return (min == null) ? new ArrayList<Node>() : min;
         } else
         {
             return new ArrayList<Node>();
         }
     }
+
+    public ArrayList<Node> CheminLePlusCourtVersYourte(Plateau etatDuJeu)
+    {
+        ArrayList<Node> obstacles = getObstacles(etatDuJeu);
+        ArrayList<Node> temp;
+        ArrayList<Node> yourtes = getYourtes(etatDuJeu);
+
+        if (yourtes.size() != 0)
+        {
+
+            ArrayList<Node> min = etatDuJeu.donneCheminAvecObstaclesSupplementaires(this.donnePosition(), yourtes.get(0), obstacles);
+            for (Node node : yourtes)
+            {
+                temp = etatDuJeu.donneCheminAvecObstaclesSupplementaires(this.donnePosition(), node, obstacles);
+                if ((temp != null && min != null))
+                {
+                    if (min.size() > temp.size())
+                        min = temp;
+                }
+
+            }
+            return (min == null) ? new ArrayList<Node>() : min;
+        } else
+        {
+            return new ArrayList<Node>();
+        }
+
+
+
+
+
+
+
+    }
+
+
+
+
+    /**
+     * Récupère la liste des Yourtes disponibles (pas occupées par d'autres joueurs nous inclus)
+     * @param etatDuJeu
+     * @return  {@link  ArrayList<Node>} ArrayList de Nodes contenant les positions des différentes yourtes
+     */
+    public ArrayList<Node> getYourtes(Plateau etatDuJeu)
+    {
+        ArrayList<Node> listeYourtes = new ArrayList<>();
+        ArrayList<Node> positionsJoueurs = new ArrayList<>();
+
+
+        for (int x = 0; x < etatDuJeu.donneTaille(); x++)
+        {
+            for (int y = 0; y < etatDuJeu.donneTaille(); y++)
+            {
+                if (Plateau.contientUneYourte(etatDuJeu.donneContenuCellule(x, y)))
+                {
+                    if (!Plateau.contientUnJoueur(etatDuJeu.donneContenuCellule(x, y)))
+                        listeYourtes.add(new Node(x, y));
+                }
+            }
+        }
+        System.out.println(listeYourtes);
+        return listeYourtes;
+
+
+    }
+
 
     public Action traduitNodeEnAction(Node cible)
     {
@@ -117,13 +183,15 @@ public class MonJoueur extends Joueur
     @Override
     public Action faitUneAction(Plateau etatDuJeu)
     {
+        getYourtes(etatDuJeu);
         if (cheminLePlusCourt.size() == 0)
+        {
             cheminLePlusCourt = cheminPlusCourtVersObjectif(etatDuJeu);
-        if(cheminLePlusCourt.size() != 0)
-            return traduitNodeEnAction(cheminLePlusCourt.get(0));
-        return Action.RIEN;
+            if (cheminLePlusCourt.size() == 0)
+                return Action.RIEN;
+        }
 
-
+        return traduitNodeEnAction(cheminLePlusCourt.get(0));
 
 
     }
