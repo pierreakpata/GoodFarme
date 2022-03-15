@@ -17,13 +17,13 @@ import java.util.ArrayList;
  */
 public class MonJoueur extends Joueur
 {
-    private ArrayList<Node> cheminLePlusCourt;
+    private ArrayList<Node> cheminLePlusCourtVersChamps;
     private ArrayList<Node> cheminLePlusCourtVersYourte;
 
     public MonJoueur(String sonNom)
     {
         super(sonNom);
-        cheminLePlusCourt = new ArrayList<>();
+        cheminLePlusCourtVersChamps = new ArrayList<>();
 
 
     }
@@ -119,7 +119,6 @@ public class MonJoueur extends Joueur
             return (min == null) ? new ArrayList<Node>() : min;
         } else
         {
-            System.out.println("OUFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF!");
             return new ArrayList<Node>();
         }
 
@@ -135,8 +134,7 @@ public class MonJoueur extends Joueur
     public ArrayList<Node> getYourtes(Plateau etatDuJeu)
     {
         ArrayList<Node> listeYourtes = new ArrayList<>();
-        ArrayList<Node> positionsJoueurs = new ArrayList<>();
-
+        //ArrayList<Node> positionsJoueurs = new ArrayList<>();
 
         for (int x = 0; x < etatDuJeu.donneTaille(); x++)
         {
@@ -153,7 +151,7 @@ public class MonJoueur extends Joueur
     }
 
 
-    public Action traduitNodeEnAction(Node cible)
+    public Action traduitNodeEnAction(Node cible, int type)
     {
         Action action = null;
         if (this.donnePosition().x == cible.x && this.donnePosition().y > cible.y)
@@ -164,10 +162,19 @@ public class MonJoueur extends Joueur
             action = Action.GAUCHE;
         if (this.donnePosition().y == cible.y && this.donnePosition().x < cible.x)
             action = Action.DROITE;
-        if (this.cheminLePlusCourt.size() == 0)
-            action = Action.RIEN;
-        cheminLePlusCourt.remove(cible);
+        if (type == 1)
+        {
+            if (this.cheminLePlusCourtVersYourte.size() == 0)
+                action = Action.RIEN;
+            cheminLePlusCourtVersYourte.remove(cible);
 
+        }
+        if (type == 2)
+        {
+            if (this.cheminLePlusCourtVersChamps.size() == 0)
+                action = Action.RIEN;
+            cheminLePlusCourtVersChamps.remove(cible);
+        }
         return action;
     }
 
@@ -176,36 +183,28 @@ public class MonJoueur extends Joueur
     public Action faitUneAction(Plateau etatDuJeu)
     {
 
-        cheminLePlusCourt = cheminPlusCourtVersChamps(etatDuJeu);
-        if (cheminLePlusCourt.size() + 20 > this.donneEnergie() || etatDuJeu.donneContenuCellule( new Node(this.donnePosition().x, this.donnePosition().y)) == Plateau.CHERCHE_YOURTE )
+        cheminLePlusCourtVersChamps = cheminPlusCourtVersChamps(etatDuJeu);
+        if (Plateau.contientUneYourte(etatDuJeu.donneContenuCellule(this.donnePosition())) && this.donneEnergie() < 100)
+            return Action.RIEN;
+
+        if (cheminLePlusCourtVersChamps.size() + 20 > this.donneEnergie()
+                || etatDuJeu.donneContenuCellule(new Node(this.donnePosition().x, this.donnePosition().y)) == Plateau.CHERCHE_YOURTE)
         {
             cheminLePlusCourtVersYourte = cheminLePlusCourtVersYourte(etatDuJeu);
-            System.out.println(cheminLePlusCourtVersYourte);
-            return traduitNodeEnAction(cheminLePlusCourtVersYourte.get(0));
-        }
-
-
-        if (cheminLePlusCourt.size() == 0)
-        {
+            if (cheminLePlusCourtVersYourte.isEmpty())
                 return Action.RIEN;
+            else
+                return traduitNodeEnAction(cheminLePlusCourtVersYourte.get(0), 1);
         }
 
-        return traduitNodeEnAction(cheminLePlusCourt.get(0));
+
+        if (cheminLePlusCourtVersChamps.size() == 0)
+        {
+            return Action.RIEN;
+        }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return traduitNodeEnAction(cheminLePlusCourtVersChamps.get(0), 2);
 
     }
 }

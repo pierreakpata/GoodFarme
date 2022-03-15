@@ -48,7 +48,7 @@ public class Lanceur {
      public static void main(String[] args) {
 
         // Génération du plateau
-        Plateau p = Plateau.generePlateauAleatoire(300, 10, 1, 10,20);
+        Plateau p = Plateau.generePlateauAleatoire(300, 10, 2, 10,20);
         // Plateau p = new Plateau(300, MON_PLATEAU_DE_TEST);
         
         // Création du maitre de jeu
